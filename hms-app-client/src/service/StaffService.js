@@ -41,6 +41,6 @@ function get2DaysAppointments() {
 
 function getBloodDonorList(bloodGroup, pinCode, pageNo) {
     var pageSize = 3;
-    return axios.get(`http://localhost:8080/staff/donorList?bGroup=${bloodGroup}&pinCode=${pinCode}&pageSize=${pageSize}&pageNo=${pageNo}`)
+    return axios.get(`http://13.232.237.90:8080/staff/donorList?bGroup=${bloodGroup}&pinCode=${pinCode}&pageSize=${pageSize}&pageNo=${pageNo}`)
 }
 export default { changePassword, updateDetails, getStaffDetails, getBloodDonorList, getListForReportUpload, showAppointment, uploadReport, get2DaysAppointments }
