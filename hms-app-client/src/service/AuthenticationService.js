@@ -1,5 +1,5 @@
 import axios from 'axios';
-axios.defaults.baseURL = "http://13.232.237.90/:8080";
+axios.defaults.baseURL = "http://13.232.237.90:8080";
 
 function authenticateUser(body) {
   //make api call for auth

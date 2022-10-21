@@ -38,7 +38,7 @@ function Payment(props) {
     function proceedPayment() {
         PatientService.subscribePlan(id, props.data).then((res) => {
             swal("Info", res.data, "success")
-            props.setCmp(<PaymentSuccessful />)
+            props.setCmp(<PatientFirstPage />)
         }
         ).catch(
             swal("Error", "Please try Again", "error")
@@ -47,6 +47,46 @@ function Payment(props) {
 
     }
 
+    const loadScript = (src) => {
+        return new Promise((resolve) => {
+            const script = document.createElement('script')
+            script.src = src
+            script.onload = () => {
+                resolve(true)
+            }
+
+            script.onerror = () => {
+                resolve(false)
+            }
+            document.body.appendChild(script)
+        })
+    }
+    const displayRazorPay = async () => {
+        const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+        console.log("Script loaded");
+
+        if (!res) {
+            alert("You are offline Failed to load Payment Gateway")
+            return;
+        }
+        const options = {
+            key: 'rzp_test_42ctP1zytKKP42',
+            currency: "INR",
+            amount: total * 100,
+            name: "HMS Application",
+            description: "Thank For Subscribing",
+
+            handler: function (response) {
+                swal("Successful", "Hi Your Payment is sccuessful with id :" + response.razorpay_payment_id, "success")
+                proceedPayment();
+
+
+            }
+        }
+
+        const paymentObject = new window.Razorpay(options);
+        paymentObject.open()
+    }
     return (<div>
         <hr></hr>
         <h1 style={{ color: "blue" }}>You Have Selected {props.data} Plan</h1>
@@ -113,7 +153,7 @@ function Payment(props) {
             </div>
             <button
                 className="btn btn-warning mb-2 me-2 mt-3 show"
-                onClick={proceedPayment}
+                onClick={displayRazorPay}
             >
                 Proceed
             </button>
