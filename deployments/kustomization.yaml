@@ -1,0 +1,17 @@
+# The secrets file should not be checked into Git. It's published only for demonstration purpose.
+secretGenerator:
+- name: mysql-root-pass
+  literals:
+  - password=root
+- name: mysql-user-pass
+  literals:
+  - username=root
+  - password=root 
+- name: mysql-db-url
+  literals:
+  - database=hms_secure
+  - url=jdbc:mysql://bus-app-mysql:3306/hms_secure?createDatabaseIfNotExist=true&&useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+resources:
+  - mysql-deployment.yaml
+  - hms-app-server.yaml
+  - hms-app-client.yaml  
