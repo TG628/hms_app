@@ -26,7 +26,7 @@ import com.app.service.IApplicationService;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RequestMapping("/careers")
 @Validated
 

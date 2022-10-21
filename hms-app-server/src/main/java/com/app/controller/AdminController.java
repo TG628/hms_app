@@ -37,7 +37,7 @@ import com.app.service.ImageHandlingService;
 @RestController
 @RequestMapping("/admin")
 @Validated
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 public class AdminController {
 
 	@Autowired

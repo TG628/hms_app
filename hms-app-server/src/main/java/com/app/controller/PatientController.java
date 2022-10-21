@@ -33,7 +33,7 @@ import com.app.service.IUserService;
 import com.app.service.ImageHandlingService;
 
 import lombok.extern.slf4j.Slf4j;
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RestController
 @RequestMapping("/patient")
 @Slf4j

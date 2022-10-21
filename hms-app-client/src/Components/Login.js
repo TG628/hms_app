@@ -14,40 +14,34 @@ function Login(props) {
     }, [])
 
     const login = (e) => {
-        if (verified) {
-            var body = {
-                email,
-                password
-            }
-            console.log(body);
 
-
-            AuthenticationService.authenticateUser(body)
-                .then(response => {
-
-                    AuthenticationService.storeUserDetails(email, response.data.jwt, response.data.role, JSON.stringify(response.data.user), response.data.user.id);
-                    console.log("In Login")
-                    swal("Login Info", "Login Successfull", "success")
-                    if (sessionStorage.getItem('user_role') === 'ROLE_PATIENT') {
-                        props.history.push("/patient")
-                    }
-                    if (sessionStorage.getItem('user_role') === 'ROLE_ADMIN')
-                        props.history.push("/admin")
-                    if (sessionStorage.getItem('user_role') === 'ROLE_STAFF')
-                        props.history.push("/staff")
-
-                })
-                .catch(error => {
-                    console.log(error)
-                    swal("Login Failed!!", "Bad Credentials", "error")
-
-                });
-
-
-
+        var body = {
+            email,
+            password
         }
-        else
-            swal("Capctha Not selected", "Select Captcha", "error")
+        console.log(body);
+
+
+        AuthenticationService.authenticateUser(body)
+            .then(response => {
+
+                AuthenticationService.storeUserDetails(email, response.data.jwt, response.data.role, JSON.stringify(response.data.user), response.data.user.id);
+                console.log("In Login")
+                swal("Login Info", "Login Successfull", "success")
+                if (sessionStorage.getItem('user_role') === 'ROLE_PATIENT') {
+                    props.history.push("/patient")
+                }
+                if (sessionStorage.getItem('user_role') === 'ROLE_ADMIN')
+                    props.history.push("/admin")
+                if (sessionStorage.getItem('user_role') === 'ROLE_STAFF')
+                    props.history.push("/staff")
+
+            })
+            .catch(error => {
+                console.log(error)
+                swal("Login Failed!!", "Bad Credentials", "error")
+
+            });
 
     }
     function onChange(value) {
@@ -77,13 +71,13 @@ function Login(props) {
                         <input className="form-control my-3" placeholder="Password" type="password" onChange={(e) => { setPassword(e.target.value) }} />
 
                         <div className="col-md-12">
-                            <div className="g-recaptcha">
+                            {/* <div className="g-recaptcha">
                                 <ReCAPTCHA className=" "
                                     sitekey="6Lfrax4iAAAAABadMXxapncuCo4Fw422WEuOggjj"
                                     onChange={onChange}
                                 />
 
-                            </div>
+                            </div> */}
 
                         </div>
                         <input className="form-control btn btn-primary btn-md my-3 show" type="button" value="Login" onClick={login}></input>

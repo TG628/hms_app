@@ -34,7 +34,7 @@ import com.app.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RequestMapping("/user")
 @Validated
 @Slf4j
