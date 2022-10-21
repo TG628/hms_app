@@ -2,7 +2,7 @@ package com.app.service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.time.LocalDate;
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -20,6 +20,7 @@ import com.app.dto.UserDto;
 import com.app.entities.Admin;
 import com.app.entities.Role;
 import com.app.entities.Staff;
+import javax.annotation.PostConstruct;
 @Service
 @Transactional
 public class AdminServiceImpl implements IAdminService {
@@ -32,6 +33,33 @@ public class AdminServiceImpl implements IAdminService {
 	private StaffRepository staffRepo;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+	@PostConstruct
+	public void initialAdmin() {
+		try{
+
+			UserDto admin=new UserDto();
+			admin.setFirstName("Tushar");
+			admin.setLastName("Gaikwad");
+			admin.setBloodGroup(BloodGroup.B_POSITIVE);
+			admin.setDob(LocalDate.of(1995, 1, 1));
+			admin.setAdharNo("245258352452");
+			admin.setEmail("admin@hms.com");
+			admin.setGender("Male");
+			admin.setPassword("Admin@12345");
+			admin.setPhone("5245256524");
+			admin.setRole(Role.ROLE_ADMIN);
+			addNewAdmin(admin);
+			
+		}catch(Exception e){
+
+		}
+
+
+		}
+
+
+
 	@Override
 	public Admin getAdminByEmail(String email) {
 		Admin admin = adminRepo.findByEmail(email).orElseThrow(()->new RuntimeException("Invalid Email!!!"));
